@@ -1,0 +1,251 @@
+﻿{
+  "Scenario": "Classification",
+  "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": false,
+    "Type": "TabularFile",
+    "FilePath": "C:\\Source Codes\\Learning_AI\\ML.NET Intro\\WiredBrain.WebApp\\languageDetection_vNext.csv",
+    "Delimiter": ";",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Language",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Message",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.58166666666666667,
+        "RuntimeInSeconds": 0.107,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e5 * e6",
+          "e0": {
+            "InputColumnName": "Message",
+            "OutputColumnName": "Message"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Message"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Language",
+            "InputColumnName": "Language",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e5": {
+            "L1Regularization": 0.03328492,
+            "L2Regularization": 0.03125,
+            "LabelColumnName": "Language",
+            "FeatureColumnName": "Features"
+          },
+          "e6": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.58166666666666667,
+        "RuntimeInSeconds": 0.196,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e5 * e6",
+          "e0": {
+            "InputColumnName": "Message",
+            "OutputColumnName": "Message"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Message"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Language",
+            "InputColumnName": "Language",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e5": {
+            "L1Regularization": 0.039013933,
+            "L2Regularization": 0.03125,
+            "LabelColumnName": "Language",
+            "FeatureColumnName": "Features"
+          },
+          "e6": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.58166666666666667,
+        "RuntimeInSeconds": 0.114,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e5 * e6",
+          "e0": {
+            "InputColumnName": "Message",
+            "OutputColumnName": "Message"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Message"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Language",
+            "InputColumnName": "Language",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e5": {
+            "L1Regularization": 0.037552573,
+            "L2Regularization": 0.031756677,
+            "LabelColumnName": "Language",
+            "FeatureColumnName": "Features"
+          },
+          "e6": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.58166666666666667,
+        "RuntimeInSeconds": 0.085,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e5 * e6",
+          "e0": {
+            "InputColumnName": "Message",
+            "OutputColumnName": "Message"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Message"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Language",
+            "InputColumnName": "Language",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e5": {
+            "L1Regularization": 0.033619903,
+            "L2Regularization": 0.03125,
+            "LabelColumnName": "Language",
+            "FeatureColumnName": "Features"
+          },
+          "e6": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LbfgsMaximumEntropyMulti",
+        "Score": 0.58166666666666667,
+        "RuntimeInSeconds": 0.083,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e5 * e6",
+          "e0": {
+            "InputColumnName": "Message",
+            "OutputColumnName": "Message"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Message"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnName": "Language",
+            "InputColumnName": "Language",
+            "AddKeyValueAnnotationsAsText": false
+          },
+          "e5": {
+            "L1Regularization": 0.034408845,
+            "L2Regularization": 0.03261316,
+            "LabelColumnName": "Language",
+            "FeatureColumnName": "Features"
+          },
+          "e6": {
+            "OutputColumnName": "PredictedLabel",
+            "InputColumnName": "PredictedLabel"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "FeaturizeText",
+      "e1": "Concatenate",
+      "e2": "MapValueToKey",
+      "e3": "FastForestOva",
+      "e4": "LbfgsLogisticRegressionOva",
+      "e5": "LbfgsMaximumEntropyMulti",
+      "e6": "MapKeyToValue"
+    },
+    "Schema": "e0 * e1 * e2 * (e3 + e4 + e5) * e6",
+    "MetricName": "MacroAccuracy",
+    "ModelFilePath": "C:\\Source Codes\\Learning_AI\\ML.NET Intro\\WiredBrain.WebApp\\LanguageDetectionModel.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 5,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Tuner": "eci-cfo",
+    "Type": "ClassificationTrainingOption",
+    "TrainingTime": 20,
+    "OptimizeMetric": "MacroAccuracy",
+    "LabelColumn": "Language",
+    "AvailableTrainers": [
+      "LBFGS",
+      "FASTFOREST"
+    ],
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}

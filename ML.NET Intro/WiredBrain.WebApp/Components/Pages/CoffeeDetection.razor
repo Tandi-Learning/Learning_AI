@@ -1,0 +1,101 @@
+﻿@page "/coffeedetection"
+@using WiredBrain_WebApp
+@rendermode InteractiveServer
+
+<PageTitle>Coffee Detection</PageTitle>
+
+<h1>Coffee Detection</h1>
+<h2>Scenario: Image classification</h2>
+
+<InputFile OnChange="LoadFileAsync" class="form-control" />
+
+@if (errorMessage is not null)
+{
+    <div class="alert alert-danger" style="margin-top:10px">@errorMessage</div>
+}
+
+@if (base64ImageSource is not null)
+{
+    <div style="margin-top:10px">
+        <img src="@base64ImageSource" />
+    </div>
+}
+
+<div style="margin-top:20px;">
+    Detected content:
+    <span style="font-weight:bold">@detectedContent</span>
+</div>
+
+@if (detectedContentAll is not null)
+{
+    <div style="margin-top:20px;">
+        Detected content probabilities:
+        <ul>
+            @foreach (var item in detectedContentAll)
+            {
+                <li>@item.Key: <span style="font-weight:bold">@(item.Value * 100) %</span></li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+    private const long maxFileSize = 2 * 1024 * 1024; // 2 MB
+
+    private string? base64ImageSource;
+
+    private string? detectedContent = "None";
+
+    private IOrderedEnumerable<KeyValuePair<string, float>>? detectedContentAll = null;
+
+    private string? errorMessage;
+
+    private async Task LoadFileAsync(InputFileChangeEventArgs e)
+    {
+        base64ImageSource = null;
+        detectedContent = "None";
+
+        if (!IsFileSizeValid(e.File.Size)) return;
+
+        byte[] image = await GetImageByteArray(e.File);
+        SetBase64ImageSource(e.File.ContentType, image);
+
+        // TODO: Set detectedContent field based on image
+        var input = new CoffeeDetectionModel.ModelInput
+        {
+            ImageSource = image
+        };
+
+        var output = CoffeeDetectionModel.Predict(input);
+
+        detectedContent = output.PredictedLabel;
+
+        detectedContentAll = CoffeeDetectionModel.PredictAllLabels(input);
+
+    }
+
+    private async Task<byte[]> GetImageByteArray(IBrowserFile browserFile)
+    {
+        using var stream = browserFile.OpenReadStream(maxAllowedSize: maxFileSize);
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        return ms.ToArray();
+    }
+    private void SetBase64ImageSource(string contentType, byte[] image)
+    {
+        var base64String = Convert.ToBase64String(image);
+        base64ImageSource = $"data:{contentType};base64,{base64String}";
+    }
+
+    private bool IsFileSizeValid(long fileSize)
+    {
+        errorMessage = null;
+        if (fileSize > maxFileSize)
+        {
+            var oneMegaByte = 1024m * 1024m;
+            var fileSizeInMB = fileSize / oneMegaByte;
+            errorMessage = $"File has {fileSizeInMB:N2}MB, but maximum upload size is 2MB";
+        }
+        return errorMessage is null;
+    }
+}

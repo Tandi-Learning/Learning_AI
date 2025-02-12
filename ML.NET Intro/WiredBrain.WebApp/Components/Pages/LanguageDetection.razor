@@ -1,0 +1,63 @@
+﻿@page "/languagedetection"
+@using WiredBrain_WebApp
+@rendermode InteractiveServer
+
+<PageTitle>Language Detection</PageTitle>
+
+<h1>Language Detection</h1>
+<h2>Scenario: Data classification (or alternatively text classification)</h2>
+
+<div>
+    Please enter your text here:
+</div>
+
+<textarea class="form-control" style="height:150px;margin-top:5px" spellcheck="false"
+@bind="inputText" @bind:event="oninput" @bind:after="TextChanged" />
+
+<div style="margin-top:20px;">
+    Detected language:
+    <span style="font-weight:bold">@detectedLanguage</span>
+</div>
+
+@if (detectedLanguageProbabilities is not null) {
+    <div style="margin-top:20px;">
+        Detected language probabilities:
+        <ul>
+            @foreach (var item in detectedLanguageProbabilities)
+            {
+                <li>@item.Key: <span style="font-weight:bold">@(Math.Round(item.Value * 100, 2)) %</span></li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+
+    private string? inputText;
+
+    private string? detectedLanguage = "None";
+
+    private IOrderedEnumerable<KeyValuePair<string, float>>? detectedLanguageProbabilities = null;
+
+    private void TextChanged()
+    {
+        if (String.IsNullOrEmpty(inputText)) 
+        {
+            detectedLanguage = "None";
+            detectedLanguageProbabilities = null;
+            return;
+        }
+
+        var input = new LanguageDetectionModel.ModelInput()
+        {
+            Message = inputText,
+        };
+
+        //Load model and predict output
+        var output = LanguageDetectionModel.Predict(input);
+
+        detectedLanguage = output.PredictedLabel;
+
+        detectedLanguageProbabilities = LanguageDetectionModel.PredictAllLabels(input);
+    }
+}
